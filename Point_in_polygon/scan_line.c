@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "scan_line.h"
 
 void init_polygon(Polygon* P, int nv, int ne, ){
     P->nv = nv;
@@ -8,6 +8,11 @@ void init_polygon(Polygon* P, int nv, int ne, ){
     P->vert = malloc(nv*sizeof(Edge));
     P->edege = malloc(nt*sizeof(Edge));
 
+}
+void dispose_polygon(Polygon* P){
+    free(P->vert);
+    free(P->edge);
+    free(P);
 }
 
 int cross_edge(Vertex v,Edge e, Polygon* P){
@@ -40,9 +45,11 @@ int point_in_polygon( Vertex v, Polygon* P){
         count = cross_edge(v, P->edge[i], P);
     }
     if (count%2 == 0){
+        printf('The point is not in the polygon \n')
         return 0;
     }
     else {
+        printf('The point is in the polygon\n')
         return 1;
     }
 }
