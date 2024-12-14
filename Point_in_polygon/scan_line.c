@@ -37,7 +37,7 @@ int cross_edge(Vertex v,Edge e, Polygon* P){
 int point_in_polygon( Vertex v, Polygon* P){
     int count = 0;
     for(int i = 0, i>P->nt, i++){
-        count = cross-edge(v, P->edge[i], P);
+        count = cross_edge(v, P->edge[i], P);
     }
     if (count%2 == 0){
         return 0;
