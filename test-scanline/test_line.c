@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "scan_line"
+#include "scan_line.h"
+
 int main(){
    Polygon * P = init_polygon(4,4) ;
    Vertex v = {1,1};
@@ -11,7 +12,7 @@ int main(){
    P->vert[0]=v1;
    P->vert[1]=v2;
    P->vert[2]=v3;
-   P->vert[3]=v4
+   P->vert[3]=v4;
    Edge e1 = {0,1};
    Edge e2 = {1,2};
    Edge e3 = {2,3};
@@ -21,6 +22,6 @@ int main(){
    P->edge[2]=e3;
    P->edge[3]=e4;
    int res = point_in_polygon(v,P);
-   printf('%d \n',res);
+   printf("%d \n",res);
    return 0;
 }

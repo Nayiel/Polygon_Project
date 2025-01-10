@@ -10,7 +10,7 @@ typedef struct Vertex{
 typedef struct Edge{
     int a;
     int b;
-};
+}Edge;
 
 typedef struct Polygon{
     int nv ;
@@ -19,7 +19,7 @@ typedef struct Polygon{
     Edge* edge;
 }Polygon;
 
-Polygon* init_polygon(int nv, int ne );
+void init_polygon(Polygon* P,int nv, int ne );
 void dispose_polygon(Polygon* P);
 int cross_edge(Vertex v,Edge e, Polygon* P);
 int point_in_polygon( Vertex v, Polygon* P);

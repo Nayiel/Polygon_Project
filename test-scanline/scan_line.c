@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include "scan_line.h"
 
-void init_polygon(Polygon* P, int nv, int ne, ){
+void init_polygon(Polygon* P, int nv, int ne){
     P->nv = nv;
-    P->nt = nt;
-    P->vert = malloc(nv*sizeof(Edge));
-    P->edege = malloc(nt*sizeof(Edge));
+    P->ne = ne;
+    P->vert = malloc(nv*sizeof(Vertex));
+    P->edge = malloc(ne*sizeof(Edge));
 
 }
 void dispose_polygon(Polygon* P){
@@ -33,23 +33,24 @@ int cross_edge(Vertex v,Edge e, Polygon* P){
         if(v.y <= e2.y + (v.x-e2.x)*(e1.y-e2.y)/(e1.x-e2.x)){
             return 1;
         }
-        else{
             return 0;
-        }
     }
-};
+}
+
+
 
 int point_in_polygon( Vertex v, Polygon* P){
     int count = 0;
-    for(int i = 0, i>P->nt, i++){
+    for(int i = 0; i<P->ne;i++){
         count = cross_edge(v, P->edge[i], P);
     }
-    if (count%2 == 0){
-        printf('The point is not in the polygon \n')
+    if(count%2 == 0){
+        printf(" Not a polygon \n");
         return 0;
     }
     else {
-        printf('The point is in the polygon\n')
+        printf("Is a polygon\n");
         return 1;
     }
 }
+
