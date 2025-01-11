@@ -3,7 +3,8 @@
 #include "scan_line.h"
 
 int main(){
-   Polygon * P = init_polygon(4,4) ;
+   Polygon * P = malloc(sizeof(Polygon));
+   init_polygon(P,4,4);
    Vertex v = {1,1};
    Vertex v1 = {0,0};
    Vertex v2 = {0,2};

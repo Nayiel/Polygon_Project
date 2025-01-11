@@ -54,3 +54,34 @@ int point_in_polygon( Vertex v, Polygon* P){
     }
 }
 
+int read_geojson(Polygon* P, const char filename){
+    FILE* f = fopen(filename,'r');
+    char line[300];
+    int nt;
+    int nvert;
+    int np;
+    int count;
+    while(!feof(f)){
+        fgets(line,300,f);
+        if(sscanf(line,"Total %d Polygon %d",&nt, &np)==1){
+            count =0;
+            P->nv=nt;
+            P->ne = nt + np -1;
+            P->vert = malloc(P->nv*sizeof(Vertex));
+            P->edge = malloc(P->ne*sizeof(Edge));
+            
+        }
+        else if(sscanf(line, "Vertices %d", &nvert)==1){
+            for(int i = 0; i<nvert; i++){
+				fgets(line, 300,f);
+				sscanf(line, "%lf %lf", &P->vert[i].x, &P->vert[i].y);
+                P->edge[count].a = count;
+                P->edge[count].b = count+1;
+                count++;   
+			}
+            P->edge[count-1].b = count-nvert;
+        }
+    }
+    fclose(f);
+    return 0;
+}
