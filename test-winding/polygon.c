@@ -1,6 +1,6 @@
 
-#include <math.h>
-#include <raylib.h>
+/* #include <math.h> */
+/* #include <raylib.h> */
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,21 +8,35 @@
 
 
 
-Polygon *initPolygonFromList(Vector2 *verts, int nvert) {
-  Polygon *poly = (Polygon*)malloc(sizeof(Polygon));
-
-  poly->capacity = nvert;
-  poly->nvert = nvert;
-  poly->verts = verts;
-  return poly;
+void initPolygon(Polygon *poly, int capacity) {
+    poly->verts = (Vector2 *)malloc(capacity * sizeof(Vector2));
+    poly->capacity = capacity;
+    poly->nvert = 0;
 }
 
-void drawPolygon(Polygon *poly) {
-  for (int i = 0; i < poly->nvert - 1; i++) {
-    DrawLineV(poly->verts[i], poly->verts[i + 1], RED);
-    DrawCircleV(poly->verts[i], 5, RED);
+void addVertex(Polygon *poly, double x, double y) {
+    if (poly->nvert >= poly->capacity) {
+        poly->capacity *= 2;
+        poly->verts = (Vector2 *)realloc(poly->verts, poly->capacity * sizeof(Vector2));
+    }
+    poly->verts[poly->nvert].x = x;
+    poly->verts[poly->nvert].y = y;
+    poly->nvert++;
+}
+
+void printPolygon(Polygon *poly) {
+  for (int i = 0; i < poly->nvert; i++) {
+    printf("Vertex %d: (%f, %f)\n", i, poly->verts[i].x, poly->verts[i].y);
   }
 }
+
+
+// Free polygon memory
+void freePolygon(Polygon *poly) {
+    free(poly->verts);
+}
+
+
 
 
 int sign(Vector2 R, Vector2 A, Vector2 B) {
@@ -31,6 +45,37 @@ int sign(Vector2 R, Vector2 A, Vector2 B) {
   if (orientation > 0) return 1;
   if (orientation == 0) return 0;
   return -1;
+}
+
+
+int parseFile(Polygon *P, const char *filename) {
+  FILE *f = fopen(filename, "r");
+  char line[300];
+  int total = 0;
+
+  if (fgets(line, sizeof(line), f)){
+    if (sscanf(line, "Vertices %d", &total) != 1) {
+      fprintf(stderr, "Invalid file format: expected 'Vertices <number>'\n");
+      fclose(f);
+      return -1;
+    }
+  }
+
+  P->capacity = 2*total;
+  P->verts = malloc(2*total*sizeof(Vector2));
+  double x,y;
+
+  while (!feof(f)) {
+    if (fgets(line, sizeof(line), f)) {
+      if (sscanf(line, "%lf %lf", &x, &y) == 2) addVertex(P, 150*x-300, 150*y-8000+600);
+      else {
+	fprintf(stderr, "Invalid coordinate format: %s\n", line);
+      }
+    }
+  }
+
+  fclose(f);
+  return 0;
 }
 
 
@@ -57,3 +102,11 @@ int isInside(Polygon *poly, Vector2 R) {
   
   return wind/4;
 }
+
+
+/* void drawPolygon(Polygon *poly) { */
+/*   for (int i = 0; i < poly->nvert - 1; i++) { */
+/*     DrawLineV(poly->verts[i], poly->verts[i + 1], RED); */
+/*     /\* DrawCircleV(poly->verts[i], 5, RED); *\/ */
+/*   } */
+/* } */

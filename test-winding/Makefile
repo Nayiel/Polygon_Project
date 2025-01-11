@@ -1,8 +1,9 @@
 # Compiler and flags
 CC = gcc
+CFLAGS = -std=c99 -Iinclude 
+LDFLAGS = -lm -ldl -pthread
+# LDFLAGS = -lraylib -lm -ldl -pthread
 #CFLAGS = -Wall -Wextra -std=c99
-CFLAGS = -std=c99
-LDFLAGS = -lraylib -lm -ldl -pthread
 
 # Project files
 TARGET = test-winding
