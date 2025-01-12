@@ -3,7 +3,7 @@
 One of the way to test if a point in $R$ is in a polygon is use an algorithm called
 winding number. The idea is to draw from each point of the vertices of the polygon $P$
 to the point $R$ and calculate the sum, called the winding number,
-$\sum \angle (RP_i, RP_{i+1})$. If the sum is zero, then the point is outside the
+$\sum \angle (RP_{i}, RP_{i+1})$. If the sum is zero, then the point is outside the
 polygon, otherwise it is inside.
 
 However, calculuating the sum of the angle is costly, and there is a better
@@ -15,21 +15,35 @@ and then we sum all the these number, that gives us the winding number.
 
 Formally, $w = \sum \delta_i$ where
 
-| quad(p_{i+1}) - quad(p_i) | \delta_i |
-|---------------------------+----------|
-| 0                         |        0 |
-| 1 or -3                   |        1 |
-| -1 or 3                   |       -1 |
-| 2 or -2 ccw               |        2 |
-| 2 or -2 cw                |       -2 |
+| quad($p_{i+1}$) - quad($p_{i}$) | $\delta_i$ |
+|---------------------------------+------------|
+| 0                               |          0 |
+| 1 or -3                         |          1 |
+| -1 or 3                         |         -1 |
+| 2 or -2 ccw                     |          2 |
+| 2 or -2 cw                      |         -2 |
 
 If $w=0$ then $R$ is outside; and $R$ is inside if $w$ is non zero.
-
 
 [[./data/pointinpoly.png]]
 
 
+* Rendering graphics
 
+We use raylib to render the polygons, and we choose Belgium for as the country
+of our interest (mainly because it's small ^-^).
+See [[https://www.raylib.com/][raylib]] officiel website for documentation. To run the code:
 
+#+begin_src bash
+  make all clean
+  ./test-winding
+#+end_src
+
+[[./data/belgium.png]]
+
+* Bugs
+
+Testing on terminal works fine, as well as displaying the country.
+However, we couldn't do both and the same time, it just crashed ...
 
 

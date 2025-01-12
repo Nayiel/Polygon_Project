@@ -21,7 +21,7 @@ $(TARGET): $(OBJ)
 
 # Clean build files
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -f $(OBJ)
 
 # Phony targets
 .PHONY: all clean
