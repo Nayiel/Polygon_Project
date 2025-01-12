@@ -3,10 +3,6 @@
 
 /* #include <raylib.h> */
 
-typedef struct Vector2 {
-  double x,y;
-} Vector2;
-
 typedef struct Polygon {
   Vector2 *verts;
   int capacity;
@@ -30,4 +26,4 @@ int isInside(Polygon *poly, Vector2 R);
 
 
 // for rendering
-/* void drawPolygon(Polygon *poly);  */
+void drawPolygon(Polygon *poly);

@@ -1,0 +1,7 @@
+# Winding number
+
+One of the way to test if a point in \(R\) is in a polygon is use an algorithm called
+winding number. The idea is to draw from each point of the vertices of the polygon \(P\)
+to the point \(R\) and calculate the sum
+\(\sum \angle (RP_i, RP_{i+1})\).
+

@@ -1,9 +1,7 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -std=c99 -Iinclude 
-LDFLAGS = -lm -ldl -pthread
-# LDFLAGS = -lraylib -lm -ldl -pthread
-#CFLAGS = -Wall -Wextra -std=c99
+CFLAGS = -Wall
+LDFLAGS = -lm -ldl -pthread -lraylib
 
 # Project files
 TARGET = test-winding
@@ -13,18 +11,17 @@ OBJ = $(SRC:.c=.o)
 # Default target
 all: $(TARGET)
 
-
 # Build the executable
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+	$(CC) $(OBJ) $(LDFLAGS) -o $(TARGET)
 
-# Build the object files
+# Build object files
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean build files
 clean:
-	rm -f $(OBJ) 
+	rm -f $(OBJ) $(TARGET)
 
-# Phony targets to prevent filename clashes
+# Phony targets
 .PHONY: all clean
