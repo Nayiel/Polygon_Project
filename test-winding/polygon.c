@@ -1,6 +1,6 @@
 
-/* #include <math.h> */
-/* #include <raylib.h> */
+#include <math.h>
+#include <raylib.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -100,13 +100,14 @@ int isInside(Polygon *poly, Vector2 R) {
     else if (qi==2 || qi==-2) {wind += 2*sign(R, poly->verts[i], poly->verts[i+1]);}
   }
   
+  /* free(quad); */
   return wind/4;
 }
 
 
-/* void drawPolygon(Polygon *poly) { */
-/*   for (int i = 0; i < poly->nvert - 1; i++) { */
-/*     DrawLineV(poly->verts[i], poly->verts[i + 1], RED); */
-/*     /\* DrawCircleV(poly->verts[i], 5, RED); *\/ */
-/*   } */
-/* } */
+void drawPolygon(Polygon *poly) {
+  for (int i = 0; i < poly->nvert - 1; i++) {
+    DrawLineV(poly->verts[i], poly->verts[i + 1], RED);
+    /* DrawCircleV(poly->verts[i], 5, RED); */
+  }
+}
