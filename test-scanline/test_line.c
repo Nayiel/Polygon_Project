@@ -36,5 +36,9 @@ int main(){
         v.y = 5;
         res = point_in_polygon(v,P);
         printf("%d \n",res);
+        Polygon* B = malloc(sizeof(Polygon));
+        read_geojson (B, "belgium.data");
+        res = point_in_polygon(v,P);
+        printf("%d \n", res);
         return 0;
 }

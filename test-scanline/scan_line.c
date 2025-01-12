@@ -54,7 +54,7 @@ int point_in_polygon( Vertex v, Polygon* P){
     }
 }
 
-int read_geojson(Polygon* P, const char filename){
+int read_geojson(Polygon* P, const char * filename){
     FILE* f = fopen(filename,'r');
     char line[300];
     int nt;

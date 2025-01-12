@@ -23,4 +23,4 @@ void init_polygon(Polygon* P,int nv, int ne );
 void dispose_polygon(Polygon* P);
 int cross_edge(Vertex v,Edge e, Polygon* P);
 int point_in_polygon( Vertex v, Polygon* P);  
-int read_geojson(Polygon* P, const char filename);                                           
+int read_geojson(Polygon* P, const char * filename);                                           
