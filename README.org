@@ -54,7 +54,7 @@ See [[https://www.raylib.com/][raylib]] officiel website for documentation. To r
   ./test-winding
 #+end_src
 
-[[./test-winding/belgium.png]]
+[[./test-winding/data/belgium.png]]
 
 * Bugs
 
