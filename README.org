@@ -1,0 +1,65 @@
+
+* Polygon_Project
+This project aim to dertermine by twos differents methods if a given point is in a given polygon or not. 
+
+
+** Scan lines
+
+The idea of the first method, is to cast a infinite line from the given point and count the number of time it cross the polygon. If is an even number, the point does not belong to the polygon and if it is odd, the point belongs to it. This is the method so called scanline or ray casting. 
+
+The test file include a main() function that test is different point are in a given square. Then it tests the last point to see if it's in Belgium or not. 
+
+The belgium.data file is a rewrite into a suitable format of a geojson file which could be find in the include folder. We did try first to parse directly the geojson file with json parser and jsmn parser but eventually we failed. 
+
+
+
+** Winding number
+
+One of the way to test if a point in $R$ is in a polygon is use an algorithm called
+winding number. The idea is to draw from each point of the vertices of the polygon $P$
+to the point $R$ and calculate the sum, called the winding number,
+$\sum \angle (RP_{i}, RP_{i+1})$. If the sum is zero, then the point is outside the
+polygon, otherwise it is inside.
+
+However, calculuating the sum of the angle is costly, and there is a better
+way to get around it. For each vertices of a polygon, there is a natural
+association to the number 0,1,2,3 called the quadrant relative to the test point $R$.
+
+And for each consecutive vertices, we calculate the difference of their quadrant,
+and then we sum all the these number, that gives us the winding number.
+
+Formally, $w = \sum \delta_i$ where
+
+| quad($p_{i+1}$) - quad($p_{i}$) | $\delta_i$ |
+|---------------------------------+------------|
+| 0                               |          0 |
+| 1 or -3                         |          1 |
+| -1 or 3                         |         -1 |
+| 2 or -2 ccw                     |          2 |
+| 2 or -2 cw                      |         -2 |
+
+If $w=0$ then $R$ is outside; and $R$ is inside if $w$ is non zero.
+
+[[./test-winding/data/pointinpoly.png]]
+
+
+* Rendering graphics
+
+We use raylib to render the polygons, and we choose Belgium for as the country
+of our interest (mainly because it's small ^-^).
+See [[https://www.raylib.com/][raylib]] officiel website for documentation. To run the code:
+
+#+begin_src bash
+  make all clean
+  ./test-winding
+#+end_src
+
+[[./test-winding/belgium.png]]
+
+* Bugs
+
+Testing on terminal works fine, as well as displaying the country.
+However, we couldn't do both and the same time, it just crashed ...
+
+
+
