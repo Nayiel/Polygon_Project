@@ -5,3 +5,5 @@ The idea of the first method, is to cast a infinite line from the given point an
 
 The test file include a main() function that test is different point are in a given square. Then it tests the last point to see if it's in Belgium or not. 
 
+The belgium.data file is a rewrite into a suitable format of a geojson file which could be find in the include folder. We did try first to parse directly the geojson file with json parser and jsmn parser but eventually we failed. 
+
