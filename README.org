@@ -50,6 +50,7 @@ of our interest (mainly because it's small ^-^).
 See [[https://www.raylib.com/][raylib]] officiel website for documentation. To run the code:
 
 #+begin_src bash
+  cd test-winding
   make all clean
   ./test-winding
 #+end_src
